@@ -22,7 +22,7 @@ buildscript {
 
     dependencies {
         classpath 'com.android.tools.build:gradle:4.1.0'
-        classpath 'com.google.protobuf:protobuf-gradle-plugin:0.8.10'
+        classpath 'com.google.protobuf:protobuf-gradle-plugin:0.8.13'
     }
 }
 
@@ -64,20 +64,22 @@ protobuf {
     plugins {
         javalite {
             // The codegen for lite comes as a separate artifact
-            artifact = 'com.google.protobuf:protoc-gen-javalite:3.0.0'
+            artifact = 'com.google.protobuf:protoc:3.13.0'
         }
     }
     generateProtoTasks {
         all().each { task ->
             task.plugins {
-                javalite { }
+                java {
+                    option "lite"
+                }
             }
         }
     }
 }
 
 dependencies {
-    implementation 'com.google.protobuf:protobuf-lite:3.0.1'
+    implementation 'com.google.protobuf:protobuf-javalite:3.11.0'
     implementation 'androidx.appcompat:appcompat:1.0.0'
-    api 'androidx.core:core:1.0.1'
+    api 'androidx.core:core:1.2.0'
 }
